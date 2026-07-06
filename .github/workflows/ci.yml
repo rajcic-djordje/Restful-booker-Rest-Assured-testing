@@ -26,5 +26,5 @@ jobs:
           USERNAME: ${{secrets.USERNAME}}
           PASSWORD: ${{secrets.PASSWORD}}
           BASE_URI: ${{secrets.BASE_URI}}
-          working-directory: Restful-booker
+        working-directory: Restful-booker
         run: mvn test
