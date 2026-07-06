@@ -18,9 +18,23 @@ public class ConfigReader {
 
         public static String get(String key){
 
-            String envValue = System.getenv(key.toUpperCase());
-            if(envValue !=null) return envValue;
+            String envKey = switch (key) {
+                case "base_uri" -> "BOOKER_BASE_URI";
+                case "username" -> "BOOKER_USERNAME";
+                case "password" -> "BOOKER_PASSWORD";
+                default -> key.toUpperCase();
+            };
+
+            String envValue = System.getenv(envKey);
+
+            if (envValue != null && !envValue.isBlank()) {
+                return envValue;
+            }
+
+
             return properties.getProperty(key);
+
+
         }
     }
 

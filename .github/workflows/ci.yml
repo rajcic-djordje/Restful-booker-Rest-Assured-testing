@@ -10,20 +10,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      BOOKER_BASE_URI: ${{ secrets.BOOKER_BASE_URI }}
+      BOOKER_USERNAME: ${{ secrets.BOOKER_USERNAME }}
+      BOOKER_PASSWORD: ${{ secrets.BOOKER_PASSWORD }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: '23'
+          java-version: '24'
           distribution: 'oracle'
 
-      - name: Tests run
-        env:
-          USERNAME: ${{secrets.USERNAME}}
-          PASSWORD: ${{secrets.PASSWORD}}
-          BASE_URI: ${{secrets.BASE_URI}}
-        run: cd Restful-booker && mvn test
+      - name: Run tests
+        working-directory: Restful-booker
+        run: mvn test
